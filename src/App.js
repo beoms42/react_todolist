@@ -2,7 +2,7 @@ import './App.css';
 import Header from "./component/Header"
 import TodoEditor from "./component/TodoEditor";
 import TodoList from "./component/TodoList";
-import {useState} from "react";
+import {useState, useRef} from "react";
 
 
 /***
@@ -30,23 +30,25 @@ const mockTodo = [
     },
 ];
 function App() {
+    const idRef = useRef(3);
     const [todo, setTodo] = useState(mockTodo);
 
 
     const onCreate = (content) => {
         const newItem = {
-            id: 0,
+            id: idRef.current,
             content,
             isDone: false,
             createDate: new Date().getTime(),
         };
         setTodo([newItem, ...todo]);
+        idRef.current = idRef.current +1;
     };
   return (
     <div className="App">
         <Header />
-        <TodoEditor/>
-        <TodoList/>
+        <TodoEditor onCreate={onCreate}/>
+        <TodoList todo={todo}/>
         <h2>Hello React.1</h2>
     </div>
   );
