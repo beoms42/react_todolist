@@ -6,7 +6,7 @@ import {useState, useRef} from "react";
 
 
 /***
-     * P316 (좌측 하단기준)
+     * P334 (좌측 하단기준)
      */
 
 const mockTodo = [
